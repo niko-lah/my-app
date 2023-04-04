@@ -6,6 +6,7 @@ import { Router } from "./pages/Router";
 import { Counter } from "./pages/Counters";
 import { Items } from "./pages/items";
 import { List } from "./pages/List";
+import { TicTacToe } from "./tictactoe/TicTacToe"
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="Counters" element={<Counter />} />
             <Route path="Items" element={<Items />} />
             <Route path="List" element={<List />} />
+            <Route path="TicTacToe" element={<TicTacToe />} />
           </Route>
         </Routes>
       </div>
