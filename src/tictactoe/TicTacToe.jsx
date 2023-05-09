@@ -22,7 +22,7 @@ export const TicTacToe = () => {
         if (strings[index] !== ''){
             return;
         }
-        strings[index] = isXTurn ? 'x' : 'o';
+        strings[index] = isXTurn ? 'X' : 'O';
         setGameState(strings);
         setIsXturn(!isXTurn)
     }
@@ -48,6 +48,12 @@ export const TicTacToe = () => {
         }
     }, [status])
 
+    function clearScoreboard(){
+        setScores({xScore:0, oScore:0})
+        setGameState(initialBoard)
+        setIsXturn(true)
+    }
+
     const checkWinner = () => {
         const lines = [
             [0,1,2],
@@ -72,10 +78,33 @@ export const TicTacToe = () => {
         <div>
             <div className="game">
                 <h1>Tic-Tac-Toe</h1>
+                <Scoreboard scores={scores}></Scoreboard>
+                <button onClick={clearScoreboard}>Clear scoreboard</button>
                 <Board gameState={gameState} onSquareClick={onSquareClick}/>
-
+                {status.includes("Winner") && (
+                    <>
+                        <span style={{color: "green"}}> {status} </span>
+                        <button style={{background: "green"}} onClick={() => {
+                            setGameState(initialBoard);
+                            setIsXturn(true);
+                        }
+                    }>Play again</button>
+                    </>
+                )
+                }
+                {!status.includes("Winner") && (
+                    <>
+                        <span> {status} </span>
+                        <button onClick={() => {
+                            setGameState(initialBoard);
+                            setIsXturn(true);
+                        }
+                    }>Clear board</button>
+                    </>
+                )
+                }
             </div>
-            {status}
+            
         </div>
     );
 }
